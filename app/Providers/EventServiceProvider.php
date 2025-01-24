@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use App\Models\Comment;
+use App\Observers\CommentObserver;
+
+class EventServiceProvider extends ServiceProvider
+{
+    public function boot(): void
+    {
+        Comment::observe(CommentObserver::class);
+    }
+} 
