@@ -13,15 +13,25 @@ class ProcessComment implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(
-        private Comment $comment
-    ) {}
+    private int $articleId;
+    private string $subject;
+    private string $body;
+
+    public function __construct(int $articleId, string $subject, string $body)
+    {
+        $this->articleId = $articleId;
+        $this->subject = $subject;
+        $this->body = $body;
+    }
 
     public function handle(): void
     {
-        // Здесь логика обработки комментария
-        // Например, проверка на спам, нецензурную лексику и т.д.
-        
-        $this->comment->update(['is_processed' => true]);
+        sleep(600); // Имитация долгой обработки
+
+        Comment::create([
+            'article_id' => $this->articleId,
+            'subject' => $this->subject,
+            'body' => $this->body,
+        ]);
     }
 } 

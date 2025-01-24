@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Http\Requests\StoreCommentRequest;
+use App\Jobs\ProcessComment;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Request $request): JsonResponse
+    public function store(StoreCommentRequest $request): JsonResponse
     {
-        $validated = $request->validate([
-            'article_id' => 'required|exists:articles,id',
-            'subject' => 'required|string|max:255',
-            'body' => 'required|string'
-        ]);
+        ProcessComment::dispatch(
+            $request->article_id,
+            $request->subject,
+            $request->body
+        );
 
-        $comment = Comment::create($validated);
-
-        return response()->json(['message' => 'Comment created successfully'], 201);
+        return response()->json(['message' => 'Комментарий поставлен в очередь на обработку']);
     }
 } 

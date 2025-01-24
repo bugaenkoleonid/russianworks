@@ -77,14 +77,25 @@ $(document).ready(function() {
     // Отправка комментария
     $('#comment-form').submit(function(e) {
         e.preventDefault();
+        
         $.post('{{ route("comments.store") }}', {
             article_id: {{ $article->id }},
             subject: $('#subject').val(),
             body: $('#body').val()
-        }, function(response) {
+        })
+        .done(function(response) {
             $('#comment-form').replaceWith(
-                '<div class="alert alert-success">Ваше сообщение успешно отправлено</div>'
+                '<div class="alert alert-success">Ваш комментарий поставлен в очередь на обработку</div>'
             );
+        })
+        .fail(function(response) {
+            if (response.status === 422) {
+                let errors = response.responseJSON.errors;
+                Object.keys(errors).forEach(function(field) {
+                    $(`#${field}`).addClass('is-invalid')
+                        .after(`<div class="invalid-feedback">${errors[field][0]}</div>`);
+                });
+            }
         });
     });
 });
