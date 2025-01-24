@@ -12,15 +12,16 @@ class ArticleFactory extends Factory
 
     public function definition(): array
     {
+        $this->faker->locale('en_US');
+        
         $title = $this->faker->unique()->sentence(3);
         
         return [
             'title' => $title,
             'slug' => Str::slug($title),
-            'content' => $this->faker->paragraphs(
-                $this->faker->numberBetween(3, 7), 
-                true
-            ),
+            'content' => collect($this->faker->paragraphs(5))
+                ->map(fn($paragraph) => "<p>{$paragraph}</p>")
+                ->join(''),
             'image' => null,
             'thumbnail' => null,
             'views_count' => $this->faker->numberBetween(0, 1000),

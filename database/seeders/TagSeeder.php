@@ -9,8 +9,16 @@ use Illuminate\Support\Str;
 
 class TagSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
+        $faker = \Faker\Factory::create('en_US');
+        
+        for ($i = 0; $i < 10; $i++) {
+            Tag::create([
+                'name' => $faker->word(),
+            ]);
+        }
+
         $tags = collect(['PHP', 'Laravel', 'Vue.js', 'JavaScript', 'CSS', 'HTML', 'Git', 'Docker'])
             ->map(function ($tag) {
                 return Tag::create([

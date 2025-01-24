@@ -12,7 +12,17 @@ class TagFactory extends Factory
 
     public function definition(): array
     {
-        $name = $this->faker->unique()->word();
+        $this->faker->locale('en_US');
+        
+        // Используем предопределенный список тегов для более реалистичных данных
+        $tags = [
+            'Technology', 'Programming', 'Web Development', 
+            'Mobile', 'Design', 'UI/UX', 'Backend', 'Frontend',
+            'DevOps', 'Security', 'Database', 'Cloud',
+            'AI', 'Machine Learning', 'Data Science'
+        ];
+        
+        $name = $this->faker->unique()->randomElement($tags);
         
         return [
             'name' => $name,
