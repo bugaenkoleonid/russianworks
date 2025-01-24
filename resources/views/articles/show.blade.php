@@ -5,9 +5,7 @@
 @section('content')
     <article class="mb-4">
         @if($article->image)
-            <img src="{{ asset('storage/' . $article->image) }}" 
-                 class="img-fluid mb-4 rounded" 
-                 alt="{{ $article->title }}">
+            <img src="{{ $article->getImage(800, 600) }}" class="img-fluid mb-4 rounded" alt="{{ $article->title }}">
         @endif
 
         <h1 class="mb-4">{{ $article->title }}</h1>

@@ -20,6 +20,7 @@ class ArticleSeeder extends Seeder
                 'title' => $title,
                 'slug' => Str::slug($title),
                 'content' => $faker->realText(1000),
+                'image' => $i + 1, // просто порядковый номер для разных картинок
                 'created_at' => $faker->dateTimeBetween('-1 year'),
                 'updated_at' => $faker->dateTimeBetween('-1 year'),
             ]);
