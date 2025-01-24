@@ -7,6 +7,8 @@ use App\Http\Requests\ArticleRequest;
 use App\Services\ImageService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Jobs\IncrementArticleLikes;
+use App\Jobs\IncrementArticleViews;
 
 class ArticleController extends Controller
 {
@@ -66,14 +68,24 @@ class ArticleController extends Controller
 
     public function like(Article $article): JsonResponse
     {
-        $article->increment('likes_count');
-        return response()->json(['likes_count' => $article->likes_count]);
+        // Диспетчим задачу в очередь
+        IncrementArticleLikes::dispatch($article->id);
+        
+        // Возвращаем текущее значение + 1, чтобы не ждать обработки очереди
+        return response()->json([
+            'likes_count' => $article->likes_count + 1
+        ]);
     }
 
     public function view(Article $article): JsonResponse
     {
-        $article->increment('views_count');
-        return response()->json(['views_count' => $article->views_count]);
+        // Диспетчим задачу в очередь
+        IncrementArticleViews::dispatch($article->id);
+        
+        // Возвращаем текущее значение + 1, чтобы не ждать обработки очереди
+        return response()->json([
+            'views_count' => $article->views_count + 1
+        ]);
     }
 
     public function destroy(Article $article): JsonResponse
