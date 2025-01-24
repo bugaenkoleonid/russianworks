@@ -40,12 +40,4 @@ class Article extends Model
         return Str::limit($this->content, 100);
     }
 
-    public function getImage(int $width, int $height = null): string
-    {
-        if ($height) {
-            return "https://loremflickr.com/{$width}/{$height}/article,blog/all?lock={$this->image}";
-        }
-        
-        return "https://loremflickr.com/{$width}/{$width}/article,blog/all?lock={$this->image}";
-    }
 } 

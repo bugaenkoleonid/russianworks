@@ -5,7 +5,9 @@
 @section('content')
     <article class="mb-4">
         @if($article->image)
-            <img src="{{ $article->getImage(800, 600) }}" class="img-fluid mb-4 rounded" alt="{{ $article->title }}">
+            <img src="https://images.placeholders.dev/800x600?text=Article+{{ $article->id }}" 
+                 class="img-fluid mb-4 rounded" 
+                 alt="{{ $article->title }}">
         @endif
 
         <h1 class="mb-4">{{ $article->title }}</h1>
