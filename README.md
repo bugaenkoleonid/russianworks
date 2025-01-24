@@ -1,66 +1,153 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Тестовое задание для веб-разработчика
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Предисловие
+Уважаемые соискатели, уважайте свое время и время программиста, проверяющего вашу работу. Если так получилось, что вы не можете (не успеваете\не хотите) выполнить задание до конца - сообщите пожалуйста об этом HR. Проверьте пожалуйста работоспособность вашего проекта ([чек-лист проверки](#чек-лист-сдачи-проекта)). 
 
-## About Laravel
+Подойдите пожалуйста к исполнению задания максимально усердно. Продумайте архитектуру проекта, используйте "плюшки" фреймворка, которые сделают ваш код качественным. Максимально хорошо организуйте код. Если можно что то вынести в сервисный слой - выносите, если можно где то использовать eloquent scopes - используйте.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Не забывайте, что мне необходимо по этому, крайне небольшому, заданию оценить ваши знания. Я хочу увидеть production ready сервис, который вы можете запустить в работу прямо сейчас.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Если у вас PHPStorm или другая IDE, то сделайте так, чтобы он не ругался на код. Подключите ide-helper (https://github.com/barryvdh/laravel-ide-helper), сгенерируйте файлы _ide_helper.php и _ide_helper_models.php. После этого прогуляйтесь по своему коду и поправьте в соответствии с рекомендациями.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Если вам не понятно задание - задавайте мне вопросы**.
 
-## Learning Laravel
+## Описание
+Необходимо написать небольшой сайт - статейник. Макет не принципиален. Можно взять bootstrap или любой другой фреймворк. Так же можно использовать любые JS фреймворки. Главное, чтобы на страницах присутствовали все компоненты.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Можно не реализовывать хранение изображений. Для заглушек можно юзать сервис [https://placeholder.com/](https://placeholder.com/) или подобный (чтобы не заморачиваться с нарезкой). Либо сделать 2 изображения (миниатюра и обычное) и переиспользовать их.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Всю логику реализуем встроенным функционалом Laravel.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Результат необходимо загрузить в публичный репозиторий GitHub.
 
-## Laravel Sponsors
+## Стек
+- PHP 7.4 или выше
+- Laravel 8 или выше
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Разделы сайта
+- [Главная страница](#главная-страница)
+- [Каталог статей](#каталог-статей)
 
-### Premium Partners
+## Страницы сайта
+- Главная страница
+Url: /
+- Каталог статей
+Url: /articles
+- Страница статьи
+Url: /articles/{slug}
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Описание страниц
+### Главная страница
+Компоненты:
+- [Навигационное меню](#навигационное-меню). Активный пункт "Главная страница".
+- Последние добавленные статьи. 6 [миниатюр статей](#миниатюра-статьи) в сортировке LIFO
 
-## Contributing
+### Каталог статей
+Компоненты:
+- [Навигационное меню](#навигационное-меню). Активный пункт "Каталог статей".
+- Листинг статей. Сортировка LIFO. 10 [миниатюр статей](#миниатюра-статьи) на страницу
+- [Пейджинация](#пейджинация)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Статья
+Компоненты:
+- [Навигационное меню](#навигационное-меню). Активный пункт "Каталог статей".
+- Обложка статьи
+- Текст статьи
+- [Теги статьи](#тег-статьи)
+- [Счетчик лайков статьи](#счетчик-лайков-статьи)
+- [Счетчик просмотров статьи](#счетчик-просмотров-статьи)
+- [Форма коментария](#форма-комментария)
 
-## Code of Conduct
+## Компоненты
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Навигационное меню
+Необходимо сделать так, чтобы в блоке меню был помечен пункт раздела, в котором находится в текущий момент пользователь. Правила формирования подсветки выбранного раздела описаны в блоке [**Описание страниц**](#описание-страниц)
 
-## Security Vulnerabilities
+### Пейджинация
+Стандартная пейджинация Laravel ([https://laravel.com/docs/7.x/pagination#introduction](https://laravel.com/docs/7.x/pagination#introduction))
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Миниатюра статьи
+Блок состоит из следующих элементов:
+- миниатюра обложки статьи
+- заголовок статьи
+- краткое описание статьи - первые 100 симоволов от текста статьи
 
-## License
+### Тег статьи
+Ссылка. Состоит из url и label. 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Счетчик лайков статьи
+Элемент является кнопкой, на которой в качестве label написано число.
+При клике на кнопку отправляется AJAX запрос, инкрементирующий счетчик. В ответе на запрос 
+возвращается новое значение, которое необходимо отобразить в label.
+
+### Счетчик просмотров статьи
+Текстовый элемент, отображающие текущий счетчик просмотров. Через 5 секунд после открытия статьи отправляется запрос, инкрементирующий счетчик. В ответе на запрос возвращается новое значение, которое необходимо отобразить в элементе.
+
+### Форма комментария
+Форма, состоящая из 2х полей:
+- Тема сообщения
+- Текст сообщения
+
+При нажатии на кнопку "Отправить" отправляется AJAX запрос. При успешной обработке форма заменяется на плашку "Ваше сообщение успешно отправлено".
+
+## API методы
+При реализации API методов учтите, что онлайн блога заранее не известен. 
+Ваша реализация должна позволять избежать блокировок БД в случае огромного количества входящих запросов (допустим 1 млн входящих запрос на инкрементацию счетчика просмотров). Это требования необходимо вам для организации правильного хранения лайков и просмотров.
+Ответ: application/json
+
+### Инкрементирование счетчика лайка
+Ответ: новое значение счетчика
+
+### Инкрементирование счетчика просмотров
+Ответ: новое значение счетчика
+
+### Создание комментария к статье
+Вводные данные: Подразумеваем, что данный механизм очень медленный по какой то причине (100500 операций). Для того, чтобы не городить реально долго выполняющуюся логику, используйте для теста команду sleep(600), которая остановит исполнение кода на 10 минут.
+
+Необходимо реализовать следующую механику:
+- API метод получает запрос
+- метод возращает ответ клиенту
+- метод исполняет логику в фоновом режиме
+
+Передаваемые поля:
+- subject. Varchar(255).
+- body. LongText
+
+Ответы: 
+- ValidationException. Если не заполнено одно из полей.
+- Success. Любой, главное чтобы с 200 кодом.
+
+## Развертывание
+Развертывание должно производиться через стандартные механизмы:
+- git clone ...
+- php artisan migrate
+- php artisan db:seed
+- php artisan serve
+
+То есть никакие импорты SQL файлов \ загрузка zip архивов - не приемлемы.
+
+## Тестирование
+- ArticleSeed. Должен сгенерировать 20 статей с рандомной датой и рандомным текстом (длина текста от 200 символов). Используем Faker.
+- ArticleTagSeed. Должен сгенерировать некоторое количество тегов, чтобы хотя бы 1 был в каждой статье.
+
+## Чек-лист сдачи проекта
+- удаляем директорию vendor и node_modules (если требуется)
+- удаляем все таблицы с тестовой БД (или пересоздаем БД)
+- удаляем файл .env из корня проекта
+- создаем файл .env на базе .env.example
+- запускаем composer install
+- запускаем npm install (если требуется)
+- создаем ключ (php artisan key:generate)
+- запускаем миграции (php artisan migrate)
+- запускаем сиды (php artisan db:seed)
+- запускаем локальный сервер (php artisan serve)
+- проверяем весь написанный функционал. Все страницы должны содержать все элементы, описанные в блоке [**Описание страниц**](#описание-страниц)
+
+## Примерный вид интерфейсов
+### Главная страница
+![Главная страница](https://i.ibb.co/Yykzsby/3.jpg)
+### Каталог статей 
+![Каталог статей](https://i.ibb.co/f4WF9nb/4.jpg)
+![Каталог статей](https://i.ibb.co/sFpCfrz/2.jpg)
+### Статья 
+![Статья](https://i.ibb.co/5LYDhRT/1.jpg)
