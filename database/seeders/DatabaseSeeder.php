@@ -6,11 +6,11 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $this->call([
             ArticleSeeder::class,
-            TagSeeder::class,
+            ArticleTagSeeder::class,
         ]);
     }
 } 
