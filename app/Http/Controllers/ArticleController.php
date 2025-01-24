@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Http\Requests\ArticleRequest;
 use App\Services\ImageService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -13,10 +14,19 @@ class ArticleController extends Controller
         private ImageService $imageService
     ) {}
 
-    public function index(): JsonResponse
+    public function index(Request $request)
     {
-        $articles = Article::with('tags')->paginate(10);
-        return response()->json($articles);
+        $query = Article::with('tags')->latest();
+
+        if ($tag = $request->get('tag')) {
+            $query->whereHas('tags', function ($q) use ($tag) {
+                $q->where('slug', $tag);
+            });
+        }
+
+        $articles = $query->paginate(10);
+
+        return view('articles.index', compact('articles'));
     }
 
     public function store(ArticleRequest $request): JsonResponse
@@ -48,17 +58,22 @@ class ArticleController extends Controller
         return response()->json($article, 201);
     }
 
-    public function show(Article $article): JsonResponse
+    public function show(Article $article)
     {
-        $article->load('tags', 'comments');
-        $article->increment('views_count');
-        return response()->json($article);
+        $article->load('tags');
+        return view('articles.show', compact('article'));
     }
 
     public function like(Article $article): JsonResponse
     {
         $article->increment('likes_count');
         return response()->json(['likes_count' => $article->likes_count]);
+    }
+
+    public function view(Article $article): JsonResponse
+    {
+        $article->increment('views_count');
+        return response()->json(['views_count' => $article->views_count]);
     }
 
     public function destroy(Article $article): JsonResponse
