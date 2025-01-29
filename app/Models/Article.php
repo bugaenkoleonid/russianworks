@@ -39,4 +39,21 @@ class Article extends Model
         return Str::limit($this->content, 100);
     }
 
+    public function scopeLatest($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
+
+    public function scopeWithTagSlug($query, $slug)
+    {
+        return $query->whereHas('tags', function ($query) use ($slug) {
+            $query->where('slug', $slug);
+        });
+    }
+
+    public function scopeWithRelations($query)
+    {
+        return $query->with(['tags']);
+    }
+
 } 

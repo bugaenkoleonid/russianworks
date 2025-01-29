@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $articles = Article::with('tags')
+        $articles = Article::withRelations()
             ->latest()
             ->take(6)
             ->get();

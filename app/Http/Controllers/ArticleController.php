@@ -18,15 +18,13 @@ class ArticleController extends Controller
 
     public function index(Request $request)
     {
-        $query = Article::with('tags')->latest();
+        $query = Article::withRelations();
 
         if ($tag = $request->get('tag')) {
-            $query->whereHas('tags', function ($q) use ($tag) {
-                $q->where('slug', $tag);
-            });
+            $query->withTagSlug($tag);
         }
 
-        $articles = $query->paginate(10);
+        $articles = $query->orderByDesc('id')->paginate(10);
 
         return view('articles.index', compact('articles'));
     }
